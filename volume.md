@@ -43,15 +43,85 @@
     1. etc
 
 # Shared Volumes
-# PVC (Persistent Volumes and Claims)
-# PV (Persistent Volume)
+# PV and PVC (Persistent Volumes and Claims)
+    - PV: Storage abstraction, can retain data longer than Pods exist
+    - PVC: defined in Pods to associalte with PV
+    - StorageClass: define backend storage, type and size
+## Persistent Storage phases
+    - Provision
+    - Bind
+    - Use
+    - Release
+    - Reclaim:  Retain, Delete, and Recycle(to be deprecated)
+    
+## PV (Persistent Volume)
+    - kind: PersistentVolume
+    - Spec: capacity, accessmodes, hostpath
+    - not a namespace object
+
+## PVC (Persistent Volume Claim)
+  ### manifest a claim
+   - kind: PersistentVolumeClaim
+    - spec: accessModes, resources
+    - a namespace object
+  ### pods to use the claim
+    - volumes:  name, persistenVolumeClaim
+    
 # Dynamic Provisioning
+    - No need to create volumes in the first place, instead, request storage from an exterior, pre-configured source.
+    - kind: StorageClass
+    - AWS and GCE are common choices for dynamic storage, other options are: Ceph cluster, iSCSI
+    - apiVersion: storage.k8s.io/v1
+    - provisioner: kubernetes.io/gce-pd
+    
 # Rook for Storage Orchestration
+    - a project allows orchestration of storage using multiple storage providers
+    - uses custom resource definition (CRD) and a custom operatior to provision storage
+    - supported storage providers: Ceph, Cassandra, Network File System (NFS)
+    
 # Secrets
+    - base64-encoded(default) or encrypted via Secret API resource
+    - kubectl commands to create or get or delete secrets,  create/get/delete
+    - EncryptionConfigration with key and proper identity
+    - flag of --encryption-provider-config 
+
 ## Using Secrets via Environment Variables
+    - yaml snippet
+    ...
+    spec:
+      containers:
+      - image: mysql:5.5
+        name: dbpod
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+              secretKeyRef:
+                  name: mysql
+                  key: password 
+      - environment variables stored in tempfs, a temporay memory-based file systems          
 ## Mounting Secrets as Volumes
+    - yaml snippet
+    ...
+    spec:
+      containers:
+      - image: busybox
+        command:
+          - sleep
+          - "3600"
+        volumeMounts:
+        - mountPath: /mysqlpassword
+          name: mysql
+      name: busy
+    volumes:
+      - name: mysql
+          secret:
+              secretName: mysql
+    - to view the secret: kubectl exec -ti busybox -- cat /mysqlpassword/password
+
 # ConfigMaps
+
 ## Portable Data
+
 ## Using ConfigMaps
 
 
