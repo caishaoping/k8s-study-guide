@@ -119,9 +119,30 @@
     - to view the secret: kubectl exec -ti busybox -- cat /mysqlpassword/password
 
 # ConfigMaps
-
-## Portable Data
-
+    - a namespace object
+    - kind: ConfigMap
+    - API resources, similar to Secrets
+    - decoupling a container image from configuration artifacts
+    - store data as sets of key/value pairs or plain config files, in a collection or in a directory;
+    - used by container as environment variables
 ## Using ConfigMaps
-
+    - Pod environment variables
+    - Pod commands
+    - Populate volume
+    - Add to specific path in Volume
+    - Set file names and access modes in Volume
+    - used by system components and controllers
+    - sample in env
+        env:
+        - name: SPECIAL_LEVEL_KEY
+          valueFrom:
+            configMapKeyRef:
+              name: special-config
+              key: special.how
+      
+    - sample in volumes
+        volumes:
+          - name: config-volume
+            configMap:
+              name: special-config
 
