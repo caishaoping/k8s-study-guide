@@ -55,10 +55,10 @@
 
 
 # Service types
-  - ClusterIP: default and only provides access internally
-  - NodePort: great for debugging
-  - LoadBalancer: pass requests to a cloud provider
-  - ExternalName: newer service, no selectors, no defined ports, no defined endpoints. Redirection at DNS level. 
+  - ClusterIP: default and only provides access internally, only reachable within Cluster.
+  - NodePort: great for debugging, expose a node IP with static port, also created ClusterIP.
+  - LoadBalancer: pass requests to a cloud provider.  NodePort and ClusterIP also created.
+  - ExternalName: newer service, no selectors, no defined ports, no defined endpoints. Redirection at DNS level. CNAME record is used.
 
 # Start a local proxy
   - kubectl proxy
