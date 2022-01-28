@@ -16,8 +16,8 @@
       service/nginx exposed
       vagrant@master-1:~$ kubectl get svc
       NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
-      kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP        41d
-      nginx        NodePort    10.109.142.213   <none>        80:31942/TCP   4s
+      kubernetes   ClusterIP   100.96.0.1        <none>        443/TCP        41d
+      nginx        NodePort    100.109.142.213   <none>        80:31942/TCP   4s
   - View service
       
       vagrant@master-1:~$ kubectl get svc nginx -o yaml
@@ -32,9 +32,9 @@
         resourceVersion: "127299"
         uid: 91e380c1-1625-4b94-ad99-2ddf1d6754dd
       spec:
-        clusterIP: 10.109.142.213
+        clusterIP: 100.109.142.213
         clusterIPs:
-        - 10.109.142.213
+        - 100.109.142.213
         externalTrafficPolicy: Cluster
         internalTrafficPolicy: Cluster
         ipFamilies:
