@@ -1,0 +1,13 @@
+#Lab11.1 Service Mesh-need to set proxy to allow access your viz dashboard from browser
+
+When you follow the lab steps 1-5, but still not able access your viz dashboard via web browser, it is very likely that kube proxy is not setup and blocking the access.
+
+First, use curl command to confirm that your viz dash board is up and running, with command like "curl http://localhost:31500/namespaces", where 31500 is your nodePort.
+
+Then, setup proxy with command like:kubectl proxy --address='0.0.0.0' --accept-hosts='^*$'
+
+After this, you can try to access via dashboard from browser like: http://external ip:31500/namespaces
+
+Reference https://stackoverflow.com/questions/39864385/how-to-access-expose-kubernetes-dashboard-service-outside-of-a-cluster
+          [LFS258 _hread](https://forum.linuxfoundation.org/discussion/860872/lab11-1-service-mesh-need-to-set-proxy-to-allow-access-your-viz-dashboard-from-browser/p1?new=1)
+
