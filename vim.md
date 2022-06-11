@@ -13,3 +13,6 @@ filetype plugin indent on
 
 
 # useful vim commands
+
+To go to line number 28, do this: 28 + G
+
