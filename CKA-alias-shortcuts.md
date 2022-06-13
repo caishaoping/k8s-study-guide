@@ -1,4 +1,4 @@
-# automation and shortcut
+# automation and shortcut k for kubectl
 
 source <(kubectl completion bash)
 
@@ -6,7 +6,7 @@ alias k=kubectl
 
 complete -F __start_kubectl k
 
-# short expression in command
+# environment varible $DR to short expression in command
 
 To setup short env variable:
 DR="--dry-run=client -o yaml"
@@ -19,7 +19,7 @@ DR="--dry-run=client -o yaml"
   
        kubectl run mypod image=nginx --dry-run=client -o yaml > mypod.yaml
 
-# To quickly set current namespace and avoid to include -n in every command:
+# kns alias for "switching" namespaces, to quickly set current namespace and avoid to include -n in every command:
 
 alias kns='kubectl config set-context --current --namespace'
 
